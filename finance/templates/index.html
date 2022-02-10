@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table tablestriped">
+        <div>
+            <form action="/" method="post">
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" id="new_password" name="new_password" placeholder="New Password" type="password" />
+                </div>
+                <div class="mb-3">
+                    <input class="form-control mx-auto w-auto" id="new_password" name="new_confirmation" placeholder="Password(again)" type="password" />
+                </div>
+                <button class="btn btn-primary" type="submit">Change Password</button>
+            </form>
+        </div>
+        <thead>
+            <tr>
+                <th class="text-strt">Symbol</th>
+                <th class="text-strt">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bought in boughts %}
+                <tr>
+                    <td class="text-strt">{{ bought.symbol }}</td>
+                    <td class="text-strt">{{ bought.company_name }}</td>
+                    <td class="text-end">{{ bought.shares }}</td>
+                    <td class="text-end">{{ bought.price | usd }}</td>
+                    <td class="text-end">{{ bought.total | usd }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{ cash }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ Total }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}
